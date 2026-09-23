@@ -2,11 +2,16 @@
 
 export const site = {
   name: "Ayan",
-  logo: "ayan.",
+  logo: "ayanZen.",
   connectHref: "#contact",
   email: "hello@example.com",
   location: "Based in India",
   availability: "Open to opportunities",
+  heroHeadline: {
+    part1: "building a",
+    part2: "smarter",
+    part3: "tomorrow.",
+  },
 } as const;
 
 export const navLinks = [
@@ -21,3 +26,12 @@ export const footer = {
   tagline: "Build · Learn · Create · Repeat",
   note: "Keep learning. Keep building.",
 };
+
+export const social = {
+  github: "https://github.com/AyanZen",
+  linkedin: "https://www.linkedin.com/in/ayan-ranjan-naskar",
+  email: "mailto:hello@example.com",
+} as const;
+
+/** Hero profile (transparent PNG) */
+export const heroPortrait = "/profile/ayan.png";

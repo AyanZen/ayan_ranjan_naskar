@@ -1,7 +1,6 @@
 "use client";
 
 import Loader from "@/components/Loader";
-import Header from "@/components/Header";
 import SectionRail from "@/components/SectionRail";
 import HeroSection from "@/components/sections/HeroSection";
 import AboutSection from "@/components/sections/AboutSection";
@@ -16,14 +15,6 @@ import Lenis from "lenis";
 import { useCallback, useRef, useState } from "react";
 
 gsap.registerPlugin(useGSAP, ScrollTrigger);
-
-const navSectionIds = [
-  "home",
-  "about",
-  "projects",
-  "experience",
-  "contact",
-];
 
 const railMap: Record<string, string> = {
   home: "01",
@@ -85,37 +76,6 @@ export default function Portfolio() {
         gsap.ticker.add(lenisRaf);
         gsap.ticker.lagSmoothing(0);
       }
-
-      gsap.fromTo(
-        ".header",
-        { y: -20, opacity: 0 },
-        { y: 0, opacity: 1, duration: 0.7, ease: "power3.out" },
-      );
-
-      gsap.fromTo(
-        "#home [data-reveal]",
-        { y: 32, opacity: 0 },
-        {
-          y: 0,
-          opacity: 1,
-          duration: 0.85,
-          stagger: 0.08,
-          ease: "power3.out",
-          delay: 0.05,
-        },
-      );
-
-      gsap.fromTo(
-        ".hero-headline",
-        { y: 40, opacity: 0 },
-        {
-          y: 0,
-          opacity: 1,
-          duration: 1,
-          ease: "power3.out",
-          delay: 0.1,
-        },
-      );
 
       if (!prefersReducedMotion) {
         gsap.utils.toArray<HTMLElement>(".shape-float").forEach((el, i) => {
@@ -189,8 +149,6 @@ export default function Portfolio() {
         );
       });
 
-      const navLinks = document.querySelectorAll(".nav__link");
-      const header = document.querySelector(".header");
       const railItems = document.querySelectorAll(".section-rail__item");
 
       function setRail(sectionId: string) {
@@ -216,36 +174,6 @@ export default function Portfolio() {
         });
       });
 
-      navSectionIds.forEach((id) => {
-        const section = document.getElementById(id);
-        if (!section) return;
-        ScrollTrigger.create({
-          trigger: section,
-          start: "top 48%",
-          end: "bottom 48%",
-          onEnter: () => setActiveNav(id),
-          onEnterBack: () => setActiveNav(id),
-        });
-      });
-
-      function setActiveNav(sectionId: string) {
-        navLinks.forEach((link) => {
-          link.classList.toggle(
-            "is-active",
-            link.getAttribute("href") === `#${sectionId}`,
-          );
-        });
-      }
-
-      ScrollTrigger.create({
-        start: 40,
-        onUpdate: (self) => {
-          const scrolled = self.scroll() > 24;
-          header?.classList.toggle("is-scrolled", scrolled);
-        },
-      });
-
-      setActiveNav("home");
       setRail("home");
       ScrollTrigger.refresh();
 
@@ -291,9 +219,8 @@ export default function Portfolio() {
         className="relative min-h-screen"
         style={{ opacity: appReady ? 1 : 0 }}
       >
-        <Header />
         <SectionRail />
-        <main className="pt-[4.25rem] md:pt-[4.75rem]">
+        <main>
           <HeroSection />
           <AboutSection />
           <SkillsSection />

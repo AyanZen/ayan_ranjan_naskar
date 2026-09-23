@@ -18,6 +18,12 @@ function SkillCard({ icon, name }: { icon: string; name: string }) {
         width={32}
         height={32}
         className="skill-card__icon !h-8 !w-8 object-contain"
+        onError={(e) => {
+          const img = e.currentTarget;
+          if (img.dataset.fallback === "1") return;
+          img.dataset.fallback = "1";
+          img.src = `https://cdn.simpleicons.org/${encodeURIComponent(name.toLowerCase().replace(/\s+/g, ""))}`;
+        }}
       />
       <span className="text-center text-xs font-medium text-neutral-700">{name}</span>
     </Bezel>
